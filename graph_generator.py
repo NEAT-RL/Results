@@ -10,7 +10,7 @@ import os
 
 if __name__ == '__main__':
     local_dir = os.path.dirname(__file__)
-    ferms = glob.glob(local_dir + 'data/NEAT/*.csv')
+    ferms = glob.glob(local_dir + '/data/EM_THEANO/csv_files/*.csv')
     #
     # ferms = glob.glob('csv_files/agent*.csv')
     # print(ferms)
@@ -24,8 +24,8 @@ if __name__ == '__main__':
         data_no_headers = pd.read_csv(ferm, names=headers)
         ax.plot(data_no_headers['iteration'], data_no_headers['average_steps'])
 
-    plt.xlabel('generation')
+    plt.xlabel('iteration')
     plt.ylabel('average_steps/reward')
-    plt.title('Average steps using RAC')
+    plt.title('Average steps/rewards per iteration of EM on Cartpole using Theano')
     plt.show()
     # plt.savefig('EM_STATE_TRANSITIONS.png', bbox_inches='tight')
