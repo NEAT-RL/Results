@@ -1,3 +1,8 @@
 .DS_STORE
 
 data/*
+*.csv
+*.npz
+*genome
+*.sh.o*
+*.sh.e*

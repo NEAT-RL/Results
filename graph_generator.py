@@ -6,10 +6,11 @@ import os
 if __name__ == '__main__':
     local_dir = os.path.dirname(__file__)
     plt.style.use('ggplot')
-    fig, axes = plt.subplots(ncols=2, nrows=3)
-    ax11, ax12, ax21, ax22, ax31, ax32 = axes.ravel()
+    # fig, axes = plt.subplots(ncols=1, nrows=1)
+    fig = plt.figure()
+    ax = fig.add_subplot(1, 1, 1)
 
-    ferms = glob.glob(local_dir + '/data/EM_ALGORITHMS/data/cartpole/power_po/**/*.csv', recursive=True)
+    ferms = glob.glob(local_dir + '/new_data/mountaincar/0.001/**/*.csv', recursive=True)
     data_frames = []
     for ferm in ferms:
         data_no_headers = pd.read_csv(ferm)
@@ -17,14 +18,16 @@ if __name__ == '__main__':
 
     df = pd.concat([data_frame for data_frame in data_frames])
     average_results = df.groupby(df.index).mean()
-    ax11.plot(average_results['Iteration'], average_results['AverageReturn'])
-    ax11.fill_between(average_results['Iteration'],
-                    df.groupby(df.index).min()['AverageReturn'],
-                    df.groupby(df.index).max()['AverageReturn'],
-                    alpha=0.2, facecolor='#089FFF')
-    ax11.set_ylabel('Average Reward')
-    ax11.set_title('CartPole-v0')
+    ax.plot(average_results['Iteration'], average_results['AverageReturn'])
+    # ax.fill_between(average_results['Iteration'],
+    #                 df.groupby(df.index).min()['AverageReturn'],
+    #                 df.groupby(df.index).max()['AverageReturn'],
+    #                 alpha=0.2, facecolor='#089FFF')
 
+    ax.set_ylabel('Average Reward')
+    ax.set_title('Average reward of on MountainCar EM Policy Gradient Algorithm with different learning rates')
+    ax.set_xlabel('Steps')
+    '''
     ferms = glob.glob(local_dir + '/data/EM_ALGORITHMS/data/mountaincar/power_po/**/*.csv', recursive=True)
     data_frames = []
     for ferm in ferms:
@@ -107,8 +110,8 @@ if __name__ == '__main__':
                      alpha=0.2, facecolor='#089FFF')
     ax32.margins(0)
     ax32.set_xlabel('Generations')
-
-
+    '''
+    print()
     """
     For each ferm in ferms. I want to 
 
